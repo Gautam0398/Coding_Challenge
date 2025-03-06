@@ -1,9 +1,9 @@
 // No need to change this file
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TaskService } from '../task.service';
-import { TaskAndId } from '../../task-types';
 import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
+import { Task } from '../../task-types';
 
 @Component({
   selector: 'app-task-display',
@@ -11,11 +11,15 @@ import { AsyncPipe } from '@angular/common';
   imports: [AsyncPipe],
   templateUrl: './task-display.component.html',
 })
-export class TaskDisplayComponent {
-  protected tasks$: Observable<Array<TaskAndId>>;
+export class TaskDisplayComponent implements OnInit {
+  protected tasks$: Observable<Array<Task>>;
 
 
   constructor(private taskService: TaskService) {
     this.tasks$ = this.taskService.getTasks()
+  }
+
+  ngOnInit(): void {
+      this.taskService.refreshTasks()
   }
 }

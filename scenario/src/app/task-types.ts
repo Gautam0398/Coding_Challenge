@@ -5,5 +5,3 @@ export type Task = {
   complete: boolean,
   description: string,
 }
-
-export type TaskAndId = Task & { _id: string }
