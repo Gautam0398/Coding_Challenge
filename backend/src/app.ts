@@ -2,8 +2,6 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import { Task } from './task-types.js'
 import cors from 'cors'
-import mongoose from 'mongoose'
-import TaskModel from './task-model.js'
 
 const app = express()
 const tasks: Array<Task> = [{
@@ -12,12 +10,6 @@ const tasks: Array<Task> = [{
   description: 'A default task from the backend',
   complete: false
 }]
-const mongoURI = process.env.MONGODB_URI || 'mongodb://database:27017/tasks'
-mongoose
-  .connect(mongoURI)
-  .then(() => console.log('MongoDB connected.'))
-  .catch((err) => console.log(err))
-
 
 app.use(bodyParser.json())
 app.use(
@@ -39,25 +31,23 @@ app.use(function(req, res, next) {
 })
 
 app.get('/api/tasks', async (req, res) => {
-  const tasks = await TaskModel.find()
   res.json(tasks)
   return
 })
 
 app.post('/api/tasks', async (req, res) => {
   const { task } = req.body
-  console.log(task)
-  await TaskModel.create(task)
+  tasks.push(task)
   res.status(201).send()
   return
 })
 
 /* Create your new route here */
 
-app.delete('/api/tasks/:id', async (req, res) => {
-  const { id } = req.params
+app.delete('/api/tasks/:index', async (req, res) => {
+  const { index } = req.params
   try {
-    await TaskModel.findByIdAndDelete(id)
+    tasks.splice(parseInt(index))
     res.status(204).send()
     return
   } catch (e) {
