@@ -11,17 +11,3 @@ services:
     build: ./backend
     ports:
       - "5200:5200"
-    environment:
-      - MONGODB_URI=mongodb://database:27017/tasks
-    depends_on:
-      - database
-
-  database:
-    image: mongo:latest
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-
-volumes:
-  mongodb_data:

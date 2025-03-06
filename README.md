@@ -5,9 +5,9 @@ This Project is an interview coding challenge. We have provided these starter fi
 ## Challenge:
 
 We have provided the initial structure for a TODO list. Most components have been pre-wired for you. We expect you to:
-1. Finish writing the `task-update` component.
-2. Implement the `updateTask` function inside `task.service.ts`.
-3. Implement a put route on the backend in the `app.ts` file.
+1. Implement a put route on the backend in the `app.ts` file.
+2. Implement a database persistence layer on the backend that will retain data between sessions.
+3. Write a test suite that includes tests for each implemented backend route.
 
 ## Getting Started
 We have provided Dockerfiles and a docker-compose.yml file for this project. Follow the steps below to start the project using Docker.
